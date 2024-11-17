@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Unit List{% endblock title %}
+
+{% block content %}
+  <h1>Unit List</h1>
+  <a href="{% url 'unit-create' %}">Create New Unit</a>
+  <ul>
+    {% for unit in units %}
+      <li>{{ unit.name }} 
+          <a href="{% url 'unit-update' unit.pk %}">Edit</a>
+          <a href="{% url 'unit-delete' unit.pk %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Create or Update Purchase{% endblock title %}
+
+{% block content %}
+  <h2>{% if purchase_form.instance.pk %}Edit Purchase{% else %}Create Purchase{% endif %}</h1>
+  
+  <form method="POST">
+    {% csrf_token %}
+    
+    <!-- Purchase Form -->
+    {{ purchase_form.as_p }}
+    
+    <h3>Purchase Products</h3>
+    
+    <!-- Management form for the formset -->
+    {{ formset.management_form }}
+    
+    <div id="purchase_products">
+      {% for form in formset %}
+        <div class="purchase-product-form">
+          {{ form.as_p }}
+        </div>
+      {% endfor %}
+    </div>
+    
+    <button type="submit">{% if purchase_form.instance.pk %}Update{% else %}Create{% endif %}</button>
+  </form>
+{% endblock %}

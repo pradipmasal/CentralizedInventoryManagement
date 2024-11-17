@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Purchase List{% endblock title %}
+
+{% block content %}
+  <h1>Purchase List</h1>
+  <a href="{% url 'purchase-create' %}">Create New Purchase</a>
+  <ul>
+    {% for purchase in purchases %}
+      <li>{{ purchase.vendor_invoice_number }} 
+          ({{ purchase.purchase_date }}) - {{ purchase.total }}
+          <a href="{% url 'purchase-update' purchase.pk %}">Edit</a>
+          <a href="{% url 'purchase-delete' purchase.pk %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

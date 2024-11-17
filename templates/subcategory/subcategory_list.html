@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Sub-Category List{% endblock title %}
+
+{% block content %}
+  <h1>Sub-Category List</h1>
+  <a href="{% url 'subcategory-create' %}">Create New Sub-Category</a>
+  <ul>
+    {% for subcategory in subcategories %}
+      <li>{{ subcategory.name }} - {{ subcategory.category.name }} 
+          <a href="{% url 'subcategory-update' subcategory.pk %}">Edit</a>
+          <a href="{% url 'subcategory-delete' subcategory.pk %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

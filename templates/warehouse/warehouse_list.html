@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Warehouses{% endblock title %}
+
+{% block content %}
+  <h2>Warehouses</h2>
+  <a href="{% url 'warehouse-create' %}" class="btn btn-primary">Add Warehouse</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>GST</th>
+        <th>Mobile</th>
+        <th>Details</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for warehouse in warehouses %}
+        <tr>
+          <td>{{ warehouse.name }}</td>
+          <td>{{ warehouse.gst_number }}</td>
+          <td>{{ warehouse.mobile }}</td>
+          <td>{{ warehouse.details }}</td>
+          <td>
+            <a href="{% url 'warehouse-update' warehouse.id %}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="{% url 'warehouse-delete' warehouse.id %}" class="btn btn-danger btn-sm">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}

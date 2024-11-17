@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Vendor List{% endblock title %}
+{% block content %}
+  <h2>Vendor List</h2>
+  <a href="{% url 'vendor-create' %}">Add New Vendor</a>
+  <ul>
+    {% for vendor in vendors %}
+      <li>
+        {{ vendor.name }} ({{ vendor.status }}) - 
+        <a href="{% url 'vendor-update' vendor.pk %}">Edit</a> | 
+        <a href="{% url 'vendor-delete' vendor.pk %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
