@@ -16,6 +16,37 @@
         </div>
       {% endfor %}
     </div>
+    <!-- <div id="sale-products-list" class="hidden">{{ formset.empty_form }}</div> -->
     <button type="submit" class="btn btn-success">Save Sale</button>
+    <button type="button" id="add_more" class="btn btn-primary">Add More</button>
+
   </form>
+
+  <script>
+    const addMoreButton = document.getElementById('add_more');
+    const formCopyTarget = document.getElementById('sale-products');
+    const totalFormsInput = document.querySelector('#id_form-TOTAL_FORMS'); // Management form input
+    let totalFormsCount = parseInt(totalFormsInput.value); // Initial total forms count
+
+    addMoreButton.addEventListener('click', add_more)
+
+    function add_more(event) {
+
+      event.preventDefault(); 
+
+      // Empty form template from the formset
+      const emptyFormTemplate = `{{ formset.empty_form.as_p|escapejs }}`;
+      const newForm = emptyFormTemplate.replace(/__prefix__/g, totalFormsCount);
+
+      // Create a new div for the form and append it to the target
+      const newFormDiv = document.createElement('div');
+      newFormDiv.className = 'sale-product-form';
+      newFormDiv.innerHTML = newForm;
+      formCopyTarget.appendChild(newFormDiv);
+
+      // Update the total forms count
+      totalFormsCount++;
+      totalFormsInput.value = totalFormsCount;
+    };
+  </script>
 {% endblock content %}
